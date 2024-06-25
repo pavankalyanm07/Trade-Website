@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title> MAP Trading Web Application</title>
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+    </head>
+    <body>
+        <header id="main-header">
+            <div class="layout">
+                    <a class="ImageLogo" href="/index"><img src="/images/MAP_logo.png" alt="MAP logo"></a>
+
+                    <%if(!user){%>
+                        <nav class="headernav">
+                    <a href="/users/login">Login</a>&nbsp;&nbsp;
+                    <a href="/users/new">Signup</a></nav>
+                <%}else{%>
+                    <nav class="headernav">
+                    <a href="/trades/newTrade">Start Trading</a>&nbsp;&nbsp;
+                    <a href="/users/profile">Profile</a>&nbsp;&nbsp;
+                    <a href="/users/logout">Logout</a><%}%></nav>
+                    
+            </div>
+
+            <nav id="navigation">
+                <div class="layout">
+                    <ul>
+                     <a href="/trades">Trades</a>
+                    </ul>
+                </div>
+            </nav>
+            <section id="main_title">
+                <div class = "layout">
+                    <h1> Music Album Posters Trading Site</h1>
+                </div>
+            </section></header>
+            
+    
+    <% if(errorMessages.length > 0) {%>
+        <% errorMessages.forEach(message=>{%>
+            <div class='error'>
+                <%=message%>
+            </div>
+            <%});%>
+                <%}%>
+    
+                    <% if(successMessages.length > 0) {%>
+    
+                        <% successMessages.forEach(message=>{%>
+                            <div class='success'>
+                                <%=message%>
+                            </div>
+                            <%});%>
+                                <%}%>

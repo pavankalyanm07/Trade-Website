@@ -1,0 +1,24 @@
+
+<%- include('../partials/header.ejs')%>
+<div class = "content">
+    <div class="manageoffer">
+        <img id= "poster_image" alt="<%= offer.requested.title%>" src="<%=offer.requested.image%>">
+    </div>
+        
+    <div class="manageoffer">
+        <img id= "poster_image" alt="<%= offer.tradingItem.title%>" src="<%=offer.tradingItem.image%>">
+    </div>
+
+    <div class="manageoffer">
+        <form>
+            <% if(offer.offerCreated == user) { %>
+                <button class="buttons" formmethod="POST" formaction="/trades/<%= offer.id%>/canceloffer?_method=DELETE" type="submit">Cancel Offer</button>
+            <% } else { %>
+                <button class="buttons" formmethod="POST" formaction="/trades/<%= offer.id%>/acceptoffer?_method=PUT" type="submit">Accept</button>
+                <button class="buttons" formmethod="POST" formaction="/trades/<%= offer.id%>/canceloffer?_method=DELETE" type="submit">Reject</button>
+            <% } %>
+        </form>
+    </div>
+
+</div>
+<%- include('../partials/footer.ejs')%>

@@ -1,0 +1,29 @@
+<%- include('../partials/header.ejs')%>
+<div class = "editPage">
+  <form class= "tradeEdit" method="post" action="/trades/<%=story._id%>?_method=PUT">
+    <div class = "trade-form">
+          <label for= "title1"> Title </label>
+            <input type = "text" id= "title1" name = "title" value = "<%= story.title%>" required > <br><br>
+    </div>
+    <div class = "trade-form">
+            <label for= "category"> Category </label>
+            <input type = "text" id= "category" name = "category" value = "<%= story.category%>" required > <br><br>
+      </div>
+      <div class = "trade-form">
+            <label for= "details"> Description </label>
+            <textarea id= "details" name = "details" required minlength="10"> <%= story.details%> </textarea> <br><br>
+      </div>
+    <div class = "trade-form">
+          <label for= "singer"> Album Singer </label>
+          <input type = "text" id= "singer" name = "singer" value = "<%= story.singer%>" required> <br><br>
+    </div>
+     
+     <div class = "trade-form">
+        <label for= "image"> Image URL </label>
+        <input type = "url" id= "image" name = "image" value = "<%= story.image%>" required> <br><br>
+   </div>
+       <button class= "buttons" type = "Submit">Update story</button>
+  </form>
+</div>
+<%-include('../partials/footer.ejs')%>
+

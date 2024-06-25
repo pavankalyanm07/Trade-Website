@@ -1,0 +1,84 @@
+
+<%- include('../partials/header.ejs')%>
+<div class = "content">
+    <h2>Welcome, <%=user.firstName%></h2>
+    <%if(stories.length){%>
+    <h3>You have created the following trades</h3>
+    <table class="stories_prof">
+        <tr><th class="style1">Category</th>
+        <th class ="style1">Title</th>
+        <th class ="style1">Singer</th>
+        <th class ="style1">Status</th>
+        <th class="style1">Actions</th>
+        </tr>
+        <%stories.forEach(story=>{%>
+            <tr>
+                
+        <td><%=story.category%></td>   
+        <td><a href='/trades/<%=story.id%>'><p class="title_bol"><%=story.title%></p></a></td>
+        <td><%=story.singer%></td>
+        <td><%=story.status%></td>
+        <td>
+        <form>
+            <button class="buttons" type = "submit" formmethod = "GET" formaction = "/trades/<%= story._id%>/edit">Edit</button>
+            <button class="buttons" formmethod="Post" formaction="/users/<%= story._id%>?_method=DELETE" type="submit">Delete</button>
+            <% if(story.status == "Pending") { %>
+                <button class="buttons" formmethod="GET" formaction="/trades/<%= story.offerid%>/manageoffer" type="submit">Manage Offer</button>
+            <% } %>
+        </form></td></tr>
+    <%}) %>
+    </table>
+        <% }else{%>
+        <h3>You have not created any stories</h3>
+        <%}%>
+
+        <%if(wacthedTrades.length){%>
+            <h3>You are watching the following trades</h3>
+            <table class="stories_prof">
+                <tr><th class="style1">Category</th>
+                <th class ="style1">Title</th>
+                <th class ="style1">Singer</th>
+                <th class ="style1">Status</th>
+                <th class="style1">Action</th>
+                </tr>
+                <%wacthedTrades.forEach(story=>{%>
+                    <tr>
+                        
+                <td><%=story.category%></td>
+                <td><a href='/trades/<%=story.id%>'><p class="title_bol"><%=story.title%></p></a></td>
+                <td><%= story.singer %></td>
+                <td><%=story.status%></td>
+                <td>
+                <form>
+                    <button class="buttons" formmethod="Post" formaction="/users/trades/<%= story._id%>/unwatch?_method=DELETE" type="submit">Unwatch</button>
+                </form></td></tr>
+            <%}) %>
+            </table>
+        <% } %>
+
+        <%if(offersCreated.length){%>
+            <h3>Your offers:</h3>
+            <table class="stories_prof">
+                <tr><th class="style1">Category</th>
+                <th class ="style1">Title</th>
+                <th class ="style1">Singer</th>
+                <th class ="style1">Status</th>
+                <th class="style1">Action</th>
+                </tr>
+                <%offersCreated.forEach(story=>{%>
+                    <tr>
+                        
+                <td><%=story.requested.category%></td>
+                <td><a href='/trades/<%=story.requested.id%>'><p class="title_bol"><%=story.requested.title%></p></a></td>
+                <td><%= story.requested.singer %></td>
+                <td><%=story.requested.status%></td>
+                <td>
+                <form>
+                    <button class="buttons" formmethod="POST" formaction="/trades/<%= story.id%>/canceloffer?_method=DELETE" type="submit">Cancel Offer</button>
+                </form></td></tr>
+            <%}) %>
+            </table>
+        <% } %>
+
+    </div>
+    <%- include('../partials/footer.ejs')%>

@@ -1,0 +1,31 @@
+
+<%- include('../partials/header.ejs')%>
+<div class = "content">
+        <%if(usertrades.length){%>
+            <h3>Your posters available:</h3>
+            <form>
+                <table class="stories_prof">
+                    <tr>
+                    <th class="style1"></th>
+                    <th class="style1">Category</th>
+                    <th class ="style1">Title</th>
+                    <th class ="style1">Singer</th>
+                    <th class ="style1">Status</th>
+                    </tr>
+                    <%usertrades.forEach(story=>{%>
+                        <tr>
+                            <td><input type="radio" name="offerproduct" id="offerproduct" value="<%=story.id%>"/></td> 
+                            <td><%=story.category%></td>
+                            <td><a href='/trades/<%=story.id%>'><p class="title_bol"><%=story.title%></p></a></td>
+                            <td><%= story.singer %></td>
+                            <td><%=story.status%></td>
+                        </tr>
+                    <%}) %>
+                </table>
+                <button class="buttons" formmethod="Post" formaction="/trades/<%= trade_req %>/offer" type="submit">Trade It</button>
+            </form>
+        <% } else { %>
+            <h3>You have not created any posters</h3>
+        <% } %>
+    </div>
+<%- include('../partials/footer.ejs')%>
